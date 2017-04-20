@@ -10,6 +10,7 @@ function updateDocumentList(){
 }
 
 function render(questionnaires){
+	console.log("Je passe par render")
   var HTML = ''
   for (var i = 0; i < questionnaires.length; i++) {
     HTML += '<tr data-id="' + questionnaires[i].id + '">' +
