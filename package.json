@@ -3,6 +3,7 @@
 "displayName": "Sushis profiles",
 "version": "1.0.0",
 "description": "A profile constructor",
+"cozy-type": "static",
 "icon-path": "sushi.png",
 "cozy-permissions": {
 	"All": {
