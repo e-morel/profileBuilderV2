@@ -3,6 +3,7 @@
 "displayName": "Sushis profiles",
 "version": "1.0.0",
 "description": "A profile constructor",
+"icon-path": "sushi.png",
 "cozy-permissions": {
 	"All": {
 		"description": "All permissions during the developpement phase"
