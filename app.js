@@ -11,10 +11,7 @@ function updateDocumentList(){
 
 function deleteQuestionnaire(){
 	console.log("je passe par delete")
-	cozysdk.defineView('questionnaire', 'all', 'function(doc){ emit(doc); }', function(err, res) {
-		if(err != null) return alert(err);
-		cozysdk.destroyByView('questionnaire', 'all', {}, function(err){ if (err != null) return alert(err);});
-	});
+	cozysdk.destroyByView('questionnaire', 'all', {}, function(err){ if (err != null) return alert(err);});
 }
 
 function render(questionnaires){
