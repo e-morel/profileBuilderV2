@@ -25,5 +25,5 @@ function render(questionnaires){
   document.querySelector('.questionnaire-list').innerHTML = HTML;
 }
 var el = document.getElementsByClassName("delete"); 
-el.addEventListener("click", deleteQuestionnaire, false); 
+el[0].addEventListener("click", deleteQuestionnaire, false); 
 document.addEventListener("DOMContentLoaded", updateDocumentList);
