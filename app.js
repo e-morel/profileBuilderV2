@@ -9,6 +9,10 @@ function updateDocumentList(){
 	});
 }
 
+function deleteQuestionnaire(){
+	cozysdk.destroyByView('questionnaire', 'all', {});
+}
+
 function render(questionnaires){
 	console.log("Je passe par render")
   var HTML = ''
@@ -19,5 +23,6 @@ function render(questionnaires){
   }
   document.querySelector('.questionnaire-list').innerHTML = HTML;
 }
-
+var el = document.getElementByClassName("delete"); 
+el.addEventListener("click", deleteQuestionnaire, false); 
 document.addEventListener("DOMContentLoaded", updateDocumentList);
