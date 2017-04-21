@@ -19,9 +19,10 @@ function render(questionnaires){
   var HTML = ''
   for (var i = 1; i < questionnaires.length; i++) {
     HTML += '<tr data-id="' + i + '">' +
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.id) + '</label></td>'
+          +   '<td><label>' + JSON.stringify(questionnaires[i].key) + '</label></td><br>'
           + '</tr>';
   }
+  console.log("i = "+i)
   document.querySelector('.questionnaire-list').innerHTML = HTML;
 }
 var el = document.getElementsByClassName("delete"); 
