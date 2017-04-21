@@ -22,7 +22,7 @@ function render(questionnaires){
   var HTML = ''
   for (var i = 0; i < questionnaires.length; i++) {
     HTML += '<tr data-id="' + i + '">' +
-          +   '<td><label>' + questionnaires[i] + '</label></td>'
+          +   '<td><label>' + JSON.stringify(questionnaires[i]) + '</label></td>'
           + '</tr>';
   }
   document.querySelector('.questionnaire-list').innerHTML = HTML;
