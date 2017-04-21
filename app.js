@@ -13,14 +13,14 @@ function deleteQuestionnaire(){
 	console.log("je passe par delete")
 	cozysdk.defineView('questionnaire', 'all', 'function(doc){ emit(doc); }', function(err, res) {
 		if(err != null) return alert(err);
-		cozysdk.destroyByView('questionnaire', 'all', {});
+		cozysdk.destroyByView('questionnaire', 'all', {}, function(err){ if (err != null) return alert(err);});
 	});
 }
 
 function render(questionnaires){
 	console.log("Je passe par render")
   var HTML = ''
-  for (var i = 0; i < questionnaires.length; i++) {
+  for (var i = 1; i < questionnaires.length; i++) {
     HTML += '<tr data-id="' + i + '">' +
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.id) + '</label></td>'
           + '</tr>';
