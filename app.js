@@ -15,11 +15,11 @@ function deleteQuestionnaire(){
 }
 
 function render(questionnaires){
-	console.log("J<th>ID</th>e passe par render")
-  var HTML = '<tr>  <th>Genre</th> <th>Age</th> <th>Temps</th> <th>IdPref</th> <th>IdReg</th> <th>IdEO</th> <th>IdPrefATM</th> <th>IdRegATM</th> <th>IdEOATM</th> <th>Changement</th> <th>PrefSetA</th> <th>PrefSetB</th></tr>'
+	console.log("Je passe par render")
+  var HTML = '<tr> <th>ID</th> <th>Genre</th> <th>Age</th> <th>Temps</th> <th>IdPref</th> <th>IdReg</th> <th>IdEO</th> <th>IdPrefATM</th> <th>IdRegATM</th> <th>IdEOATM</th> <th>Changement</th> <th>PrefSetA</th> <th>PrefSetB</th></tr>'
   for (var i = 0; i < questionnaires.length; i++) {
-    HTML += '<tr data-id="' + i + '">' +
-          //+   '<td><label>' + JSON.stringify(questionnaires[i].key.id) + '</label></td><br>'
+    HTML += '<tr>' +
+          +   '<td><label>' + JSON.stringify(questionnaires[i].key.id) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.genre) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.age) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.temps) + '</label></td><br>'
