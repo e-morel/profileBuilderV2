@@ -15,7 +15,7 @@ function render(questionnaire){
   var HTML = '<tr> <th>Personne n°</th> <th>Sexe</th> <th>Age</th> <th>Rapidité</th> <th>Lieu d habitation</th> <th>Lieu d habitation(15 ans av)</th> <th>Top 3 sushis set A</th></tr>'
   var profil = new Object();
   var profilPref = new Object();
-            
+            console.log(questionnaire);
             //construction du profil
             if JSON.stringify(questionnaire["key"]["genre"])>0{
                 profil["sexe"]="feminin";
