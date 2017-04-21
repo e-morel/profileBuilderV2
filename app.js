@@ -91,4 +91,4 @@ function render(questionnaire){
   console.log("i = "+i)
   document.querySelector('.questionnaire-list').innerHTML = HTML;
 } 
-document.querySelector('.send').addEventListener('change', updateDocumentList);
+document.querySelector('.valide').addEventListener('click', updateDocumentList);
