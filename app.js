@@ -10,15 +10,18 @@ function updateDocumentList(){
 
 function deleteQuestionnaire(){
 	console.log("je passe par delete")
-	cozysdk.destroyByView('questionnaire', 'all', {});
+	cozysdk.defineView('questionnaire', 'all', 'function(doc){ emit(doc); }', function(err, res) {
+		if(err != null) return alert(err);
+		cozysdk.destroyByView('questionnaire', 'all', {});
+	});
 }
 
 function render(questionnaires){
 	console.log("Je passe par render")
   var HTML = ''
   for (var i = 0; i < questionnaires.length; i++) {
-    HTML += '<tr data-id="' + questionnaires[i].id + '">' +
-          +   '<td><label>' + questionnaires[i].temps + '</label></td>'
+    HTML += '<tr data-id="' + i + '">' +
+          +   '<td><label>' + questionnaires[i] + '</label></td>'
           + '</tr>';
   }
   document.querySelector('.questionnaire-list').innerHTML = HTML;
