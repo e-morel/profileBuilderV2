@@ -1,42 +1,94 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
-	cozysdk.defineView('questionnaire', 'all', 'function(doc){ emit(doc); }', function(err, res) {
+	var id = document.querySelector('.send').value;
+	cozysdk.defineView('questionnaire', 'id', 'function(doc){ if(doc.id=='+ id +') {emit(doc); }}', function(err, res) {
 		if(err != null) return alert(err);
-		cozysdk.queryView('questionnaire', 'all', {}, function(err, res) {
+		cozysdk.queryView('questionnaire', 'id', {}, function(err, res) {
 			if (err != null) return alert(err);
 			render(res);
 		});
 	});
 }
 
-function deleteQuestionnaire(){
-	console.log("je passe par delete")
-	cozysdk.destroyByView('questionnaire', 'all', {}, function(err){ if (err != null) return alert(err);});
-}
-
-function render(questionnaires){
+function render(questionnaire){
 	console.log("Je passe par render")
-  var HTML = '<tr> <th>ID</th> <th>Genre</th> <th>Age</th> <th>Temps</th> <th>IdPref</th> <th>IdReg</th> <th>IdEO</th> <th>IdPrefATM</th> <th>IdRegATM</th> <th>IdEOATM</th> <th>Changement</th> <th>PrefSetA</th> <th>PrefSetB</th></tr>'
-  for (var i = 0; i < questionnaires.length; i++) {
+  var HTML = '<tr> <th>Personne n°</th> <th>Sexe</th> <th>Age</th> <th>Rapidité</th> <th>Lieu d habitation</th> <th>Lieu d habitation(15 ans av)</th> <th>Top 3 sushis set A</th></tr>'
+  var profil = new Object();
+  var profilPref = new Object();
+            
+            //construction du profil
+            if JSON.stringify(questionnaire.key.genre)>0{
+                profil["sexe"]="feminin";
+            }else{
+                profil["sexe"]="masculin";
+            }
+            
+            if JSON.stringify(questionnaire.key.age)<1{
+                profil["age"]="adolescent 15-19 ans";
+            }else if JSON.stringify(questionnaire.key.age)<2{
+                profil["age"]="jeune 20-29 ans";
+            }else if JSON.stringify(questionnaire.key.age)<3{
+                profil["age"]="trentenaire 30-39 ans";
+            }else if JSON.stringify(questionnaire.key.age)<4{
+                profil["age"]="quadragenaire 40-49 ans";
+            }else if JSON.stringify(questionnaire.key.age)<5{
+                profil["age"]="quiquagenaire 50-59 ans";
+            }else if JSON.stringify(questionnaire.key.age)<6{
+                profil["age"]="retraité 60 ans et plus";
+            }
+    
+            if JSON.stringify(questionnaire.key.temps)<343{
+                profil["rapidite"]="rapide"+" "+JSON.stringify(questionnaire.key.temps)+" secondes";
+            }else if 343<=JSON.stringify(questionnaire.key.temps) && JSON.stringify(questionnaire.key.temps)<521{
+                profil["rapidite"]="modéré"+" "+JSON.stringify(questionnaire.key.temps)+" secondes";
+            }else if 521<=JSON.stringify(questionnaire.key.temps) && JSON.stringify(questionnaire.key.temps)<699{
+                profil["rapidite"]="lent"+" "+JSON.stringify(questionnaire.key.temps)+" secondes";
+            }else if 699<=JSON.stringify(questionnaire.key.temps){
+                profil["rapidite"]="très lent"+" "+JSON.stringify(questionnaire.key.temps)+" secondes";
+            }
+                
+            switch JSON.stringify(questionnaire.key.idPrefATM) {
+                case 1:
+                    profil["habitation"]="Aomori dans la région de Tohoku à l'Est du Japon";
+                default:
+                    profil["habitation"]="Prefecture non reconnue";
+            }
+            
+            if JSON.stringify(questionnaire.key.changement)>0{
+                switch JSON.stringify(questionnaire.key.idPref){
+                    case 4:
+                        profil["origine"]="Hokinawa dans la région de Okinawa à l'Ouest du Japon";
+                    default:
+                       profil["origine"]="Prefecture non reconnue";
+                }
+            }else{
+                profil["origine"]="Même lieu d'habitation qu'actuellement";
+            }
+            
+            for j:=0;j<3;j++{
+                switch JSON.stringify(questionnaire.key.prefSetA){
+                    case 1:
+                        profilPref[j]="anago";
+                    case 2:
+                        profilPref[j]="maguro";
+                    case 5:
+                        profilPref[j]="ikura";
+                }
+            }
+        }
+    }
+    
     HTML += '<tr data-id="' + i + '">'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.id) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.genre) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.age) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.temps) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idPref) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idReg) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idEO) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idPrefATM) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idRegATM) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.idEOATM) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.changement) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.prefSetA) + '</label></td>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.prefSetB) + '</label></td>'
+          +   '<td><label>' + JSON.stringify(questionnaire.key.id) + '</label></td>'
+          +   '<td><label>' + profil["sexe"] + '</label></td>'
+          +   '<td><label>' + profil["age"] + '</label></td>'
+          +   '<td><label>' + profil["rapidite"] + '</label></td>'
+          +   '<td><label>' + profil["habitation"] + '</label></td>'
+          +   '<td><label>' + profil["origine"] + '</label></td>'
+          +   '<td><label>' + profilPref[0]+ ' ' + profilPref[1] + ' ' + profilPref[2] + '</label></td>'
           + '</tr>';
   }
   console.log("i = "+i)
   document.querySelector('.questionnaire-list').innerHTML = HTML;
-}
-var el = document.getElementsByClassName("delete"); 
-el[0].addEventListener("click", deleteQuestionnaire, false); 
-document.addEventListener("DOMContentLoaded", updateDocumentList);
+} 
+document.querySelector('.send').addEventListener('change', updateDocumentList);
