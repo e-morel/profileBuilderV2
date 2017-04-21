@@ -4,8 +4,7 @@ function updateDocumentList(){
 		if(err != null) return alert(err);
 		cozysdk.queryView('questionnaire', 'all', {}, function(err, res) {
 			if (err != null) return alert(err);
-			var quest = JSON.stringify(res);
-			render(quest);
+			render(res);
 		});
 	});
 }
@@ -19,10 +18,10 @@ function render(questionnaires){
 	console.log("Je passe par render")
   var HTML = '<tr> <th>ID</th> <th>Genre</th> <th>Age</th> <th>Temps</th> <th>IdPref</th> <th>IdReg</th> <th>IdEO</th> <th>IdPrefATM</th> <th>IdRegATM</th> <th>IdEOATM</th> <th>Changement</th> <th>PrefSetA</th> <th>PrefSetB</th></tr>'
   for (var i = 0; i < questionnaires.length; i++) {
-    HTML += '<tr>' +
-          +   '<td><label>' + questionnaires[i] + '</label></td><br>'
-          /*+   '<td><label>' + questionnaires[i].key.genre + '</label></td><br>'
-          +   '<td><label>' + questionnaires[i].key.age + '</label></td><br>'
+    HTML += '<tr data-id="' + i + '">' +
+          +   '<td><label>' + parseInt(JSON.stringify(questionnaires[i].key.id)) + '</label></td><br>'
+          +   '<td><label>' + JSON.stringify(questionnaires[i].key.genre) + '</label></td><br>'
+          +   '<td><label>' + JSON.stringify(questionnaires[i].key.age) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.temps) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.idPref) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.idReg) + '</label></td><br>'
@@ -32,7 +31,7 @@ function render(questionnaires){
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.idEOATM) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.changement) + '</label></td><br>'
           +   '<td><label>' + JSON.stringify(questionnaires[i].key.prefSetA) + '</label></td><br>'
-          +   '<td><label>' + JSON.stringify(questionnaires[i].key.prefSetB) + '</label></td><br>'*/
+          +   '<td><label>' + JSON.stringify(questionnaires[i].key.prefSetB) + '</label></td><br>'
           + '</tr>';
   }
   console.log("i = "+i)
