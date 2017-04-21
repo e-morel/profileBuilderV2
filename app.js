@@ -1,4 +1,5 @@
 function updateDocumentList(){
+	console.log("Je passe par updateDocumentList")
 	cozysdk.defineView('questionnaire', 'all', 'function(doc){ emit(doc); }', function(err, res) {
 		if(err != null) return alert(err);
 		cozysdk.queryView('questionnaire', 'all', {}, function(err, res) {
