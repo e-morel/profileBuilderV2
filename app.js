@@ -23,17 +23,17 @@ function render(questionnaire){
                 profil["sexe"]="masculin";
             }
             
-            if JSON.stringify(questionnaire.key.age)<1{
+            if JSON.stringify(questionnaire["key"]["age"])<1{
                 profil["age"]="adolescent 15-19 ans";
-            }else if JSON.stringify(questionnaire.key.age)<2{
+            }else if JSON.stringify(questionnaire["key"]["age"])<2{
                 profil["age"]="jeune 20-29 ans";
-            }else if JSON.stringify(questionnaire.key.age)<3{
+            }else if JSON.stringify(questionnaire["key"]["age"])<3{
                 profil["age"]="trentenaire 30-39 ans";
-            }else if JSON.stringify(questionnaire.key.age)<4{
+            }else if JSON.stringify(questionnaire["key"]["age"])<4{
                 profil["age"]="quadragenaire 40-49 ans";
-            }else if JSON.stringify(questionnaire.key.age)<5{
+            }else if JSON.stringify(questionnaire["key"]["age"])<5{
                 profil["age"]="quiquagenaire 50-59 ans";
-            }else if JSON.stringify(questionnaire.key.age)<6{
+            }else if JSON.stringify(questionnaire["key"]["age"])<6{
                 profil["age"]="retraité 60 ans et plus";
             }
     
