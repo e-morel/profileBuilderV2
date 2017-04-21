@@ -3,8 +3,7 @@ function updateDocumentList(){
 		if(err != null) return alert(err);
 		cozysdk.queryView('questionnaire', 'all', {}, function(err, res) {
 			if (err != null) return alert(err);
-			var questionnaires = JSON.parse("" + res);
-			render(questionnaires);
+			render(res);
 		});
 	});
 }
@@ -19,7 +18,7 @@ function render(questionnaires){
   var HTML = ''
   for (var i = 0; i < questionnaires.length; i++) {
     HTML += '<tr data-id="' + questionnaires[i].id + '">' +
-          +   '<td><label>' + questionnaires[i].key + '</label></td>'
+          +   '<td><label>' + questionnaires[i].temps + '</label></td>'
           + '</tr>';
   }
   document.querySelector('.questionnaire-list').innerHTML = HTML;
