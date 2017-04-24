@@ -12,7 +12,7 @@ function updateDocumentList(){
 			render(res);
 		});
 	});*/
-	cozysdk.find('questionnaire', id , function(err, note){ 
+	cozysdk.find('questionnaire', 'a9441f483790fd5d3bc4d4cdcd379e81' , function(err, note){ 
 		if(err != null) return alert(err);
 		render(note);
 		 });
