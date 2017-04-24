@@ -1,11 +1,11 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
 	var id = document.querySelector('.send').value;
-	console.log(typeof id)
+	console.log(parseInt(id))
 	id = "'"+id+"'";
-	console.log(typeof id)
+	console.log(parseInt(id))
 	id = '8151';
-	console.log(typeof id)
+	console.log(parseInt(id))
 	console.log(id)
 	byId = function(doc){ if(doc.id==id) {emit(doc); }}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
