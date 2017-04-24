@@ -1,11 +1,11 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
 	var id = document.querySelector('.send').value;
-	byId = function(doc){  emit(doc._id); }
+	byId = function(doc){  emit(doc.temps); }
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {key: 'a9441f483790fd5d3bc4d4cdcd379e81', include_docs: true}, function(err, res) {
+		cozysdk.queryView('questionnaire', 'id', {key: '208', include_docs: true}, function(err, res) {
 			if (err != null) return alert(err);
 			console.log("queryView passé")
 			render(res);
@@ -23,7 +23,7 @@ function render(questionnaire){
   var profil = new Object();
   var profilPref = new Object();
             console.log(questionnaire);
-            console.log(typeof questionnaire[0]["key"]["id"]);
+            console.log(typeof questionnaire[0]["doc"]["id"]);
             //construction du profil
             /*if JSON.stringify(questionnaire["key"]["genre"])>0{
                 profil["sexe"]="feminin";
