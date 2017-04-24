@@ -5,8 +5,10 @@ function updateDocumentList(){
 	byId = function(doc){ if(doc.id==id) {emit(doc); }}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
+		console.log("defineView passé")
 		cozysdk.queryView('questionnaire', 'id', {}, function(err, res) {
 			if (err != null) return alert(err);
+			console.log("queryView passé")
 			render(res);
 		});
 	});
