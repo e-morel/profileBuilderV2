@@ -23,6 +23,7 @@ function render(questionnaire){
   var profil = new Object();
   var profilPref = new Object();
             console.log(questionnaire);
+            console.log(typeof questionnaire[0]["key"]["id"]);
             //construction du profil
             /*if JSON.stringify(questionnaire["key"]["genre"])>0{
                 profil["sexe"]="feminin";
