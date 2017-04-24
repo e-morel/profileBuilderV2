@@ -3,7 +3,7 @@ function updateDocumentList(){
 	var id = document.querySelector('.send').value;
 	console.log("truc"+id+"truc");
 	console.log(typeof '8151');
-	byId = function(doc){ if(doc.id==id) {emit(doc); }}
+	byId = function(doc){ if(JSON.stringify(doc.id)==JSON.stringify(id)) {emit(doc); }}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
