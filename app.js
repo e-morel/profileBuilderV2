@@ -3,7 +3,7 @@ function updateDocumentList(){
 	var id = document.querySelector('.send').value;
 	console.log(id)
 	byId = function(doc){ if(doc.temps=='208') {emit(doc); }}
-	/*cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
+	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
 		cozysdk.queryView('questionnaire', 'id', {}, function(err, res) {
@@ -11,7 +11,7 @@ function updateDocumentList(){
 			console.log("queryView passé")
 			render(res);
 		});
-	});*/
+	});
 	cozysdk.find('questionnaire', 'a9441f483790fd5d3bc4d4cdcd379e81' , function(err, note){ 
 		if(err != null) return alert(err);
 		render(note);
