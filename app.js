@@ -2,7 +2,8 @@ function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
 	var id = document.querySelector('.send').value;
 	console.log(id)
-	cozysdk.defineView('questionnaire', 'id', 'function(doc){ if(doc.id=='+ id +') {emit(doc); }}', function(err, res) {
+	byId = function(doc){ if(doc.id==id) {emit(doc); }}
+	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		cozysdk.queryView('questionnaire', 'id', {}, function(err, res) {
 			if (err != null) return alert(err);
