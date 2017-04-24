@@ -17,7 +17,7 @@ function render(questionnaire){
   var profilPref = new Object();
             console.log(questionnaire);
             //construction du profil
-            if JSON.stringify(questionnaire["key"]["genre"])>0{
+            /*if JSON.stringify(questionnaire["key"]["genre"])>0{
                 profil["sexe"]="feminin";
             }else{
                 profil["sexe"]="masculin";
@@ -75,8 +75,6 @@ function render(questionnaire){
                         profilPref[j]="ikura";
                 }
             }
-        }
-    }
     
     HTML += '<tr data-id="' + i + '">'
           +   '<td><label>' + JSON.stringify(questionnaire.key.id) + '</label></td>'
@@ -87,8 +85,7 @@ function render(questionnaire){
           +   '<td><label>' + profil["origine"] + '</label></td>'
           +   '<td><label>' + profilPref[0]+ ' ' + profilPref[1] + ' ' + profilPref[2] + '</label></td>'
           + '</tr>';
-  }
   console.log("i = "+i)
-  document.querySelector('.questionnaire-list').innerHTML = HTML;
-} 
+  document.querySelector('.questionnaire-list').innerHTML = HTML;*/
+}
 document.querySelector('.valide').addEventListener('click', updateDocumentList);
