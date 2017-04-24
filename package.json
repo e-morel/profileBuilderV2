@@ -6,7 +6,7 @@
 "cozy-type": "static",
 "icon-path": "sushi.png",
 "cozy-permissions": {
-	"All": {
+	"questionnaire": {
 		"description": "All permissions during the developpement phase"
 		}
 	}
