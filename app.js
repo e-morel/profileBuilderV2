@@ -1,6 +1,5 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
-	var id = document.querySelector('.send').value;
 	byId = function(doc){  emit(doc._id,doc);}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
@@ -19,13 +18,15 @@ function render(questionnaire){
   var profil = new Object();
   var profilPref = new Object();
   console.log(questionnaire);
-  if(questionnaire[0]){
-		console.log(typeof questionnaire[0]["doc"]["id"]);
-		cozysdk.find('questionnaire', 'a9441f483790fd5d3bc4d4cdcd379e81' , function(err, note){ 
+  for(var donnee in questionnaire){
+	var id = document.querySelector('.send').value;
+	  if(donnee["value"]["id"]==id){
+		cozysdk.find('questionnaire', donnee["id"] , function(err, note){ 
 			if(err != null) return alert(err);
 			console.log(note);
 		 });
-}
+		}
+	}
             //construction du profil
             /*if JSON.stringify(questionnaire["key"]["genre"])>0{
                 profil["sexe"]="feminin";
