@@ -5,7 +5,7 @@ function updateDocumentList(){
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {key : "8151"}, function(err, res) {
+		cozysdk.queryView('questionnaire', 'id', {startkey : '8151'}, function(err, res) {
 			if (err != null) return alert(err);
 			console.log("queryView passé")
 			render(res);
