@@ -1,11 +1,11 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
 	var id = document.querySelector('.send').value;
-	byId = function(doc){  if(doc.temps){ emit(doc.temps,doc._id); }}
+	byId = function(doc){  if(doc.id){ emit(doc.id,doc); }}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {key: '208', include_docs: true}, function(err, res) {
+		cozysdk.queryView('questionnaire', 'id', {key : "8151"}, function(err, res) {
 			if (err != null) return alert(err);
 			console.log("queryView passé")
 			render(res);
