@@ -63,7 +63,7 @@ function render(questionnaire){
             }
             
             if (JSON.stringify(personne["changement"])>0){
-                switch JSON.stringify(personne["idPref"]){
+                switch (JSON.stringify(personne["idPref"])){
                     case 4:
                         profil["origine"]="Hokinawa dans la région de Okinawa à l'Ouest du Japon";
                     default:
