@@ -18,9 +18,11 @@ function render(questionnaire){
   var profil = new Object();
   var profilPref = new Object();
   console.log(questionnaire);
+  var trouve = false;
   for(var i=0; i<questionnaire.length; i++){
 	var id = document.querySelector('.send').value;
 	  if(questionnaire[i]["doc"]["id"]==id){
+		  trouve = true;
 		cozysdk.find('questionnaire', questionnaire[i]["id"] , function(err, personne){ 
 			if(err != null) return alert(err);
 			console.log(personne);
@@ -94,9 +96,12 @@ function render(questionnaire){
           +   '<td><label>' + profilPref[0]+ ' ' + profilPref[1] + ' ' + profilPref[2] + '</label></td>'
           + '</tr>';
   console.log("i = "+i)
-  document.querySelector('.questionnaire-list').innerHTML = HTML;
 		 });
 		}
 	}
+	if(!trouve){
+		HTML = "L'identifiant saisi ne correspond à personne dans la base";
+	}
+	document.querySelector('.questionnaire-list').innerHTML = HTML;
 }
 document.querySelector('.valide').addEventListener('click', updateDocumentList);
