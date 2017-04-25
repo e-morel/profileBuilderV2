@@ -25,33 +25,33 @@ function render(questionnaire){
 			if(err != null) return alert(err);
 			console.log(personne);
 			//construction du profil
-            if JSON.stringify(personne["genre"])>0{
+            if (JSON.stringify(personne["genre"])>0){
                 profil["sexe"]="feminin";
             }else{
                 profil["sexe"]="masculin";
             }
             
-            if JSON.stringify(personne["age"])<1{
+            if (JSON.stringify(personne["age"])<1){
                 profil["age"]="adolescent 15-19 ans";
-            }else if JSON.stringify(personne["age"])<2{
+            }else if (JSON.stringify(personne["age"])<2){
                 profil["age"]="jeune 20-29 ans";
-            }else if JSON.stringify(personne["age"])<3{
+            }else if (JSON.stringify(personne["age"])<3){
                 profil["age"]="trentenaire 30-39 ans";
-            }else if JSON.stringify(personne["age"])<4{
+            }else if (JSON.stringify(personne["age"])<4){
                 profil["age"]="quadragenaire 40-49 ans";
-            }else if JSON.stringify(personne["age"])<5{
+            }else if (JSON.stringify(personne["age"])<5){
                 profil["age"]="quiquagenaire 50-59 ans";
-            }else if JSON.stringify(personne["age"])<6{
+            }else if (JSON.stringify(personne["age"])<6){
                 profil["age"]="retraité 60 ans et plus";
             }
     
-            if JSON.stringify(personne["temps"])<343{
+            if (JSON.stringify(personne["temps"])<343){
                 profil["rapidite"]="rapide"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else if 343<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<521{
+            }else (if 343<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<521){
                 profil["rapidite"]="modéré"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else if 521<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<699{
+            }else (if 521<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<699){
                 profil["rapidite"]="lent"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else if 699<=JSON.stringify(personne["temps"]){
+            }else (if 699<=JSON.stringify(personne["temps"])){
                 profil["rapidite"]="très lent"+" "+JSON.stringify(personne["temps"])+" secondes";
             }
                 
@@ -62,7 +62,7 @@ function render(questionnaire){
                     profil["habitation"]="Prefecture non reconnue";
             }
             
-            if JSON.stringify(personne["changement"])>0{
+            if (JSON.stringify(personne["changement"])>0){
                 switch JSON.stringify(personne["idPref"]){
                     case 4:
                         profil["origine"]="Hokinawa dans la région de Okinawa à l'Ouest du Japon";
@@ -73,7 +73,7 @@ function render(questionnaire){
                 profil["origine"]="Même lieu d'habitation qu'actuellement";
             }
             
-            for j:=0;j<3;j++{
+            for (j:=0;j<3;j++){
                 switch JSON.stringify(personne["prefSetA"]){
                     case 1:
                         profilPref[j]="anago";
