@@ -4,10 +4,10 @@ function updateDocumentList(){
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {include_docs : true}, function(err, res) {
+		cozysdk.destroyByView('questionnaire', 'id', {/*include_docs : true*/}, function(err){//, res) {
 			if (err != null) return alert(err);
-			console.log("queryView passé")
-			render(res);
+			/*console.log("queryView passé")
+			render(res);*/
 		});
 	});
 }
