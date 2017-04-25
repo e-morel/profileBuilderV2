@@ -20,6 +20,7 @@ function render(questionnaire){
   console.log(questionnaire);
   for(var donnee in questionnaire){
 	var id = document.querySelector('.send').value;
+	console.log(donnee);
 	  if(donnee["doc"]["id"]==id){
 		cozysdk.find('questionnaire', donnee["id"] , function(err, note){ 
 			if(err != null) return alert(err);
