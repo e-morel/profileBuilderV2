@@ -55,7 +55,7 @@ function render(questionnaire){
                 profil["rapidite"]="très lent"+" "+JSON.stringify(personne["temps"])+" secondes";
             }
                 
-            switch JSON.stringify(personne["idPrefATM"]) {
+            switch (JSON.stringify(personne["idPrefATM"]) ){
                 case 1:
                     profil["habitation"]="Aomori dans la région de Tohoku à l'Est du Japon";
                 default:
@@ -74,7 +74,7 @@ function render(questionnaire){
             }
             
             for (j:=0;j<3;j++){
-                switch JSON.stringify(personne["prefSetA"]){
+                switch (JSON.stringify(personne["prefSetA"])){
                     case 1:
                         profilPref[j]="anago";
                     case 2:
