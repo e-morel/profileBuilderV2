@@ -96,12 +96,13 @@ function render(questionnaire){
           +   '<td><label>' + profilPref[0]+ ' ' + profilPref[1] + ' ' + profilPref[2] + '</label></td>'
           + '</tr>';
   console.log("i = "+i)
+  document.querySelector('.questionnaire-list').innerHTML = HTML;
 		 });
 		}
 	}
 	if(!trouve){
 		HTML = "L'identifiant saisi ne correspond à personne dans la base";
+		document.querySelector('.questionnaire-list').innerHTML = HTML;
 	}
-	document.querySelector('.questionnaire-list').innerHTML = HTML;
 }
 document.querySelector('.valide').addEventListener('click', updateDocumentList);
