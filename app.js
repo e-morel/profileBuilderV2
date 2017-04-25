@@ -4,7 +4,7 @@ function updateDocumentList(){
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.destroyByView('questionnaire', 'id', nil, function(err){//, res) {  include_docs : true
+		cozysdk.destroyByView('questionnaire', 'id', null, function(err){//, res) {  include_docs : true
 			if (err != null) return alert(err);
 			/*console.log("queryView passé")
 			render(res);*/
