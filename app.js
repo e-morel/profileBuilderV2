@@ -73,7 +73,7 @@ function render(questionnaire){
                 profil["origine"]="Même lieu d'habitation qu'actuellement";
             }
             
-            for (j:=0;j<3;j++){
+            for (var j=0;j<3;j++){
                 switch (JSON.stringify(personne["prefSetA"])){
                     case 1:
                         profilPref[j]="anago";
