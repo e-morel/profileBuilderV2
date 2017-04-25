@@ -1,20 +1,16 @@
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
 	var id = document.querySelector('.send').value;
-	byId = function(doc){  if(doc.id){ emit(doc.id,doc); }}
+	byId = function(doc){  emit(doc._id,doc);}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {startkey : '8151'}, function(err, res) {
+		cozysdk.queryView('questionnaire', 'id', {}, function(err, res) {
 			if (err != null) return alert(err);
 			console.log("queryView passé")
 			render(res);
 		});
 	});
-	cozysdk.find('questionnaire', 'a9441f483790fd5d3bc4d4cdcd379e81' , function(err, note){ 
-		if(err != null) return alert(err);
-		render(note);
-		 });
 }
 
 function render(questionnaire){
@@ -25,6 +21,10 @@ function render(questionnaire){
   console.log(questionnaire);
   if(questionnaire[0]){
 		console.log(typeof questionnaire[0]["doc"]["id"]);
+		cozysdk.find('questionnaire', 'a9441f483790fd5d3bc4d4cdcd379e81' , function(err, note){ 
+			if(err != null) return alert(err);
+			console.log(note);
+		 });
 }
             //construction du profil
             /*if JSON.stringify(questionnaire["key"]["genre"])>0{
