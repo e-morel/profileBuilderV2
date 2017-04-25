@@ -18,11 +18,11 @@ function render(questionnaire){
   var profil = new Object();
   var profilPref = new Object();
   console.log(questionnaire);
-  for(var donnee in questionnaire){
+  for(var i=0; i<questionnaire.length; i++){
 	var id = document.querySelector('.send').value;
-	console.log(donnee);
-	  if(donnee["doc"]["id"]==id){
-		cozysdk.find('questionnaire', donnee["id"] , function(err, note){ 
+	console.log(questionnaire[i]["doc"]);
+	  if(questionnaire[i]["doc"]["id"]==id){
+		cozysdk.find('questionnaire', questionnaire[i]["id"] , function(err, note){ 
 			if(err != null) return alert(err);
 			console.log(note);
 		 });
