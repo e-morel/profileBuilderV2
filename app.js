@@ -47,11 +47,11 @@ function render(questionnaire){
     
             if (JSON.stringify(personne["temps"])<343){
                 profil["rapidite"]="rapide"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else (if 343<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<521){
+            }else if (343<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<521){
                 profil["rapidite"]="modéré"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else (if 521<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<699){
+            }else if (521<=JSON.stringify(personne["temps"]) && JSON.stringify(personne["temps"])<699){
                 profil["rapidite"]="lent"+" "+JSON.stringify(personne["temps"])+" secondes";
-            }else (if 699<=JSON.stringify(personne["temps"])){
+            }else if (699<=JSON.stringify(personne["temps"])){
                 profil["rapidite"]="très lent"+" "+JSON.stringify(personne["temps"])+" secondes";
             }
                 
