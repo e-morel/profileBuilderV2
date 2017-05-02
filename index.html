@@ -1,15 +1,23 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Profiles about Sushis</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="{{.Locale}}">
+  <head>
+    <meta charset="utf-8">
+    <title>My Awesome App for Cozy</title>
+    <link rel="stylesheet" src="//{{.Domain}}/settings/theme.css">
+    <link rel="stylesheet" src="my-app.css">
+    {{.CozyClientJS}}
+    {{.CozyBar}}
+    <script defer src="my-app.js"></script>
+    <script defer src="./cozy-client.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
 	<p>In progress...</p>
 	<input class="send" placeholder="Add a new contact">
 	<input class="valide" type="button" value="Confirmer">
 	<table align="center" class="questionnaire-list"></table>
-	<script src="./cozysdk-client.js"></script>
-	<script src="./app.js"></script>
-</body>
+	<!-- <script src="./cozysdk-client.js"></script> -->
+    <div role="application" data-token="{{.Token}}" data-cozy-stack="{{.Domain}}">
+    </div>
+  </body>
 </html>

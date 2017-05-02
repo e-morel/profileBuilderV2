@@ -1,0 +1,34 @@
+{
+  "name": "Profiles",
+  "slug": "profiles",
+  "icon": "sushi.png",
+  "description": "Create your profile using your data",
+  "version": "3.0.0",
+  "licence": "AGPL-3.0",
+  "source": "https://github.com/e-morel/cozy-app.git@build",
+  "developer": {
+    "name": "Cozy",
+    "url": "https://cozy.io"
+  },
+  "default_locale": "en",
+  "locales": {},
+  "routes": {
+    "/": {
+      "folder": "/",
+      "index": "index.html",
+      "public": false
+    }
+  },
+  "permissions": {
+    "apps": {
+      "description": "Required by the cozy-bar to display the icons of the apps",
+      "type": "io.cozy.apps",
+      "verbs": ["GET"]
+    },
+    "questionnaire": {
+		"description": "Required by the profile app to display your profile about sushis",
+		"type": "questionnaire",
+		"verbs": ["GET"]
+    }
+  }
+}
