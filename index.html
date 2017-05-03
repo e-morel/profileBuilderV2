@@ -8,15 +8,12 @@
     {{.CozyClientJS}}
     {{.CozyBar}}
     <script defer src="my-app.js"></script>
-    <!-- <script defer src="./cozy-client.js"></script>-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
   </head>
   <body>
-	<input class="send" placeholder="Add a new contact">
+	<input class="send" placeholder="Put the ID">
 	<input class="valide" type="button" value="Confirmer">
 	<table align="center" class="questionnaire-list"></table>
-	<!-- <script src="./cozysdk-client.js"></script> -->
     <div role="application" data-token="{{.Token}}" data-cozy-stack="{{.Domain}}">
     </div>
   </body>
