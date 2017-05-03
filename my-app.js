@@ -7,26 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     token: app.dataset.token,
     version: 3
   })
-  
-  cozy.bar.init({
-    appName: app.dataset.cozyAppName
-  })
-  console.log(app.dataset.cozyStack);
-  console.log(app.dataset.token);
-  console.log(app.dataset.AppName);
 })
-
-/*cozy.client.init({
-  cozyURL: 'http://cozy.tools:8080',
-  disablePromises: false,
-  version: 3,
-  oauth: {
-    clientParams: {redirectURI: 'http://localhost:3333/do_access'},
-    scopes: ["io.cozy.files:GET"],
-    onRegistered: (client, url) => { /* */ /*},
-    storage: new cozy.auth.LocalStorage(window.localStorage)
-  }
-})*/
 
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
@@ -38,17 +19,6 @@ function updateDocumentList(){
 	  "limit": 1
 	});
 	console.log(resultats);
-	console.log("Query");
-	/*byId = function(doc){  emit(doc._id);}
-	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
-		if(err != null) return alert(err);
-		console.log("defineView passé")
-		cozysdk.queryView('questionnaire', 'id', {include_docs : true}, function(err, res) {
-			if (err != null) return alert(err);
-			console.log("queryView passé")
-			render(res);
-		});
-	});*/
 }
 
 function render(questionnaire){
@@ -142,6 +112,6 @@ function render(questionnaire){
 	if(!trouve){
 		HTML = "L'identifiant saisi ne correspond à personne dans la base";
 		document.querySelector('.questionnaire-list').innerHTML = HTML;
-	}
+	}*/
 }
 document.querySelector('.valide').addEventListener('click', updateDocumentList);
