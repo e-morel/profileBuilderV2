@@ -2,28 +2,44 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('[role=application]')
-  cozy.init({
+  cozy.client.init({
     cozyURL: app.dataset.cozyStack,
-    token: app.dataset.token
+    token: app.dataset.token,
+    version: 3
   })
+  
+  cozy.bar.init({
+    appName: app.dataset.cozyAppName
+  })
+  console.log(app.dataset.cozyStack);
+  console.log(app.dataset.token);
+  console.log(app.dataset.AppName);
 })
 
-cozy.client.init({
+/*cozy.client.init({
   cozyURL: 'http://cozy.tools:8080',
   disablePromises: false,
   version: 3,
-  //JE SUIS ARRIVE ICI
   oauth: {
-    clientParams: {/*...*/},
+    clientParams: {redirectURI: 'http://localhost:3333/do_access'},
     scopes: ["io.cozy.files:GET"],
-    onRegistered: (client, url) => { /* */ },
+    onRegistered: (client, url) => { /* */ /*},
     storage: new cozy.auth.LocalStorage(window.localStorage)
   }
-})
+})*/
 
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
-	byId = function(doc){  emit(doc._id);}
+	var res = cozy.client.data.defineIndex("questionnaire", ['numero', 'temps']);
+	console.log(res);
+	console.log("Define index");
+	/*var resultats = cozy.client.data.query(res, {
+	  "selector": {numero: 6371},
+	  "limit": 1
+	});
+	console.log(resultats);
+	console.log("Query");
+	/*byId = function(doc){  emit(doc._id);}
 	cozysdk.defineView('questionnaire', 'id', byId, function(err, res) {
 		if(err != null) return alert(err);
 		console.log("defineView passé")
@@ -32,7 +48,7 @@ function updateDocumentList(){
 			console.log("queryView passé")
 			render(res);
 		});
-	});
+	});*/
 }
 
 function render(questionnaire){
