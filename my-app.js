@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateDocumentList(){
 	console.log("Je passe par updateDocumentList")
-	var res = cozy.client.data.defineIndex("questionnaire", ['numero', 'temps']);
+	console.log("MODIFE")
+	var res = cozy.client.data.defineIndex('io.cozy.apps', ['type', 'id']);
+	/*const results = cozy.client.data.query(res, {
+  "selector": {type: 'io.cozy.apps'},
+  "limit": 3,
+  "skip": 0
+	});*/
 	console.log(res);
 	console.log("Define index");
 }
