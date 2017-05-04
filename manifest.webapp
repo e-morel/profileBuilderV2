@@ -1,7 +1,6 @@
 {
   "name": "Profiles",
   "slug": "profiles",
-  "icon": "sushi.png",
   "description": "Create your profile using your data",
   "version": "3.0.0",
   "licence": "AGPL-3.0",
@@ -25,8 +24,8 @@
       "type": "io.cozy.apps",
       "verbs": ["GET"]
     },
-    "questionnaire": {
-		"description": "Required by the profile app to display your profile about sushis",
+    "org.emorel.questionnaire": {
+		"description": "Required by the profile app to display your profile",
 		"type": "questionnaire",
 		"verbs": ["GET"]
     }
