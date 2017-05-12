@@ -27,7 +27,7 @@
     "org.emorel.questionnaire": {
 		"description": "Required by the profile app to display your profile",
 		"type": "questionnaire",
-		"verbs": ["GET"]
+		"verbs": ["GET", "POST", "PUT"]
     }
   }
 }
