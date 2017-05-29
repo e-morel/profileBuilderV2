@@ -1,20 +1,85 @@
 <!DOCTYPE html>
 <html lang="{{.Locale}}">
-  <head>
-    <meta charset="utf-8">
-    <title>My Awesome App for Cozy</title>
-    <link rel="stylesheet" src="//{{.Domain}}/settings/theme.css">
-    <link rel="stylesheet" src="my-app.css">
-    {{.CozyClientJS}}
-    {{.CozyBar}}
-    <script defer src="my-app.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-	<input class="send" placeholder="Put the ID">
-	<input class="valide" type="button" value="Confirmer">
-	<table align="center" class="questionnaire-list"></table>
-    <div role="application" data-token="{{.Token}}" data-cozy-stack="{{.Domain}}">
-    </div>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>Profile</title>
+		<!-- jQuery library -->
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/jquery.timelinr-0.9.6.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/viz-lite.js"></script>
+		<script defer src="my-app.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="app.css">
+		{{.CozyClientJS}}
+		{{.CozyBar}}
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div role="application" data-token="{{.Token}}" data-cozy-domain="{{.Domain}}" data-locale="{{.Locale}}" data-app-name="{{.AppName}}"></div>
+		<div class="container-fluid">
+			<div id="profileCss">
+				<div class="center" id="profile"></div>
+				<div class="center" id="profileSuite"></div>
+			</div>
+			<div id="text-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+				<!-- Wrapper for slides -->
+				<div class="row">
+					<div class="col-xs-offset-3 col-xs-6">
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="carousel-content">
+									<div>
+										<h1>StackExchange</h1>
+										<p class="center" id="infos"></p>
+										<h2>Préférences:</h2>
+										<p class="center" id="prefs"></p>
+									</div>
+								</div>
+							</div>
+							<div class="item center">
+								<div class="carousel-content">
+									<h1>StackExchange</h1>
+									<div id="timeline">
+									   <ul id="dates">
+									   </ul>
+									   <ul id="issues">	
+									   </ul>
+									   <div id="grad_left"></div>
+									   <div id="grad_right"></div>
+									   <a href="#" id="next">+</a>
+									   <a href="#" id="prev">-</a>
+									</div>
+								</div>
+							</div>
+							<div class="item center">
+								<div class="carousel-content">
+									<div>
+										<h1>Sushis</h1>
+										<input class="send" placeholder="Put the ID">
+										<input class="valide" type="button" value="Créer profil">
+										<p class="center" id="infosSushis"></p>
+										<h2>Préférences:</h2>
+										<h3>Liste A :</h3>
+										<p class="center" id="prefsSushisSetA"></p>
+										<h3>Liste B :</h3>
+										<p class="center" id="prefsSushisSetB"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Controls --> 
+				<a class="left carousel-control" href="#text-carousel" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a class="right carousel-control" href="#text-carousel" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
+		</div>
+	</body>
 </html>
