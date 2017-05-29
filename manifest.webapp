@@ -1,10 +1,10 @@
 {
-  "name": "Profiles",
-  "slug": "profiles",
+  "name": "ProfileBuilder",
+  "slug": "profilesBuilder",
   "description": "Create your profile using your data",
   "version": "3.0.0",
   "licence": "AGPL-3.0",
-  "source": "https://github.com/e-morel/cozy-app.git@build",
+  "source": "https://github.com/e-morel/profileBuilder.git@build",
   "developer": {
     "name": "Cozy",
     "url": "https://cozy.io"
