@@ -1,5 +1,6 @@
 'use strict'
 
+//Méthode pour initialiser l'API cozy-client-js et la Cozy-Bar
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('[role=application]')
   cozy.client.init({
@@ -12,17 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
     lang: app.dataset.locale
   })
   updateDocumentList();
-  
 })
 
+//Support à modifier en fonction de celui calculé sur le jeu de données
 var SUPPORT = 1;
 
+//Fonction executant les requêtes auprès de la BDD
 async function updateDocumentList(){
 	const userByNum = await cozy.client.data.defineIndex('org.emorel.user',['numero']);
 	const user = await cozy.client.data.query(userByNum, {
 	  "selector": {numero: 5},
 	  "fields": ["_id", "display_name", "location", "last_access_date", "creation_date", "reputation", "views", "up_votes", "down_votes"]
 	})
+	//Données concernant les users
 	renderUser(user[0]);
 	
 	const allPosts = await cozy.client.data.defineIndex('org.emorel.post',['_id']);
@@ -31,10 +34,12 @@ async function updateDocumentList(){
 		"_id": {"$gte": null}
 	    }
 	})
+	//Données sur les posts
 	renderPosts(posts);
 	serieTemporelle(posts);
 }
 
+//Requête sur les données concernant les sushis
 async function sushis(){
 	var id=document.querySelector('.send').value;
 	const questionnaireByNum = await cozy.client.data.defineIndex('org.emorel.questionnaire',['numero']);
@@ -43,6 +48,7 @@ async function sushis(){
 			"numero": Number(id)
 		}
 	})
+	//Vérification si l'ID saisi existe
 	if(questionnaires.length==0){
 		var HTML = "L'identifiant saisi ne correspond à personne dans la base";
 		document.getElementById("infosSushis").innerHTML = HTML;
@@ -53,23 +59,27 @@ async function sushis(){
 		renderQuestionnaire(questionnaires);
 	}
 }
+
+//Fonction d'affichage des infos principales sur profil StackExchange
 var HTML = '';
 function renderUser(user){
-	HTML = '<img src="tete.png" width="90" height="90"><br/>';
+	HTML = '<img src="img/tete.png" width="90" height="90"><br/>';
 	HTML += '<b>Pseudo : </b>' + user.display_name + '<br/>';
 	HTML += '<b>Habitation : </b>' + user.location + '<br/>';
 	var HTML2 = '<b>Dernière connexion : </b>' + toDate(user.last_access_date) + '<br/>';
 	HTML2 += '<b>Création de compte : </b>' + toDate(user.creation_date) + '<br/>';
 	HTML2 += '<b>Réputation : </b>' + user.reputation + '<br/>';
-	HTML2 += '<img src="eye.png" width="30" height="30"> : ' + user.views;
-	HTML2 += ' <img src="air.png" width="30" height="30"> : ' + user.up_votes;
-	HTML2 += ' <img src="bas.png" width="30" height="30"> : ' + user.down_votes + '<br/>';
+	HTML2 += '<img src="img/eye.png" width="30" height="30"> : ' + user.views;
+	HTML2 += ' <img src="img/air.png" width="30" height="30"> : ' + user.up_votes;
+	HTML2 += ' <img src="img/bas.png" width="30" height="30"> : ' + user.down_votes + '<br/>';
 	document.getElementById("profile").innerHTML += HTML;
 	document.getElementById("infos").innerHTML += HTML2;
 }
 
+//Calcul des préférences sur les tags
 function renderPosts(posts){
 	var tags= new Array();
+	//Extraction des tags
 	for (var m = 0; m < posts.length; m++) {
 		if(posts[m].tags!=null){
 			var temp = posts[m].tags.split('<');
@@ -80,19 +90,23 @@ function renderPosts(posts){
 		}
 	}
 	var counts = new Array();
+	//Comptage des occurences des tags
     tags.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
     var temp = counts;
     tags= new Array();
+    //Application du support
     for(var n in counts){
 		if(counts[n]>SUPPORT){
 			tags.push(n);
 		}
 	}
+	//Ordonnancement des tags
     tags.sort(function(a,b){if(counts[a]<2){return -1;}else{return counts[a] - counts[b]}});
     tags.reverse();
     var HTML1 = 'Sujets plus fréquents : ';
 	var fois = [];
 	var vues=[];
+	//Extraction du nombre de vues pour le dégradé
 	for(var m = 0; m < tags.length; m++) { vues[m]=0;}
 	for(var k = 0; k < tags.length; k++) {
 		for (var m = 0; m < posts.length; m++) {
@@ -104,12 +118,14 @@ function renderPosts(posts){
 		}
 	}
 	var tmp="";
+	//Modification des tags pour esthétisme
 	for(var n = 0; n < tags.length; n++) {
 		fois[n]=temp[tags[n]];
 		tags[n]=tags[n][0].toUpperCase() + tags[n].substring(1);
 		tmp=tags[n].split("-");
 		tags[n]=tmp[0]+"_"+tmp[1];
 	}
+	//Création et implémentation du graphe Graphviz
 	var HTML="digraph {";
 	var preprevious=[];
 	var previous=[tags[0]];
@@ -117,9 +133,11 @@ function renderPosts(posts){
 	fois[1]=11;*/
 	var color=250;
 	var diff=5;
+	//Calcul de la couleur de fond
 	HTML+=tags[0]+'[color="'+hslToHex(parseInt(color-(vues[0]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
 	for(var n = 1; n < tags.length; n++) {
 		HTML+=tags[n]+'[color="'+hslToHex(parseInt(color-(vues[n]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
+		//Création des liens en fonction des ex aequo
 		if(fois[n]<fois[n-1]){
 			for(var c = 0; c < previous.length; c++) {
 					HTML+=previous[c]+" -> "+tags[n]+";";
@@ -145,6 +163,7 @@ function renderPosts(posts){
 	document.getElementById("prefs").innerHTML += "</br>Dégradé de couleur (vues): + rouge -> bleu -";
 }
 
+//Exploitation des informations des questionnaires Sushis
 async function renderQuestionnaire(questionnaire){
 	var profil = new Object();
 	var profilPrefA = new Object();
@@ -192,6 +211,7 @@ async function renderQuestionnaire(questionnaire){
 	profilPrefA = await getSetA(personne);
 	profilPrefB = await getSetB(personne);
 	    
+	//Affichage des préférences
 	var HTML1 = '<ol class="center">'
 	+ '<li>'+ profilPrefA[0]+ '</li>'
     + '<li>' + profilPrefA[1]+'</li>'
@@ -212,7 +232,11 @@ async function renderQuestionnaire(questionnaire){
 	document.getElementById("infosSushis").innerHTML = HTML3;
 }
 
+//Détection des pics d'activité
 function serieTemporelle(posts){
+	var moy=0;
+	var ecartT=0;
+	var nb=0;
 	var tab= new Array();
 	var vues= new Array();
 	var date;
@@ -227,6 +251,7 @@ function serieTemporelle(posts){
 				vues[temp[n]]=vues[temp[n]] || 0;
 				vues[temp[n]]+=parseInt(posts[m].view_count);
                 tab[date].push(temp[n]);
+                nb++;
 			}
 		}
 	}
@@ -241,6 +266,7 @@ function serieTemporelle(posts){
 	}
 }
 
+//Calcul des préférences en fonction des pics d'activité
 function calcul_prefs(tags, views,date,pic){
 	var id="prefs"+date.substring(1,5);
 	console.log(id);
@@ -316,6 +342,7 @@ function calcul_prefs(tags, views,date,pic){
 	});
 }
 
+//Fonctions de simplification du code
 async function getAdresseATM(personne){
 	const prefectureByNum = await cozy.client.data.defineIndex('org.emorel.prefecture',['numero']);
 	const prefecture = await cozy.client.data.query(prefectureByNum, {
@@ -384,6 +411,7 @@ async function getSetB(personne){
 	return temp;
 }
 
+//Tranformation des dates
 function toDate(entree){
 	var date = entree.split('T');
 	var heure = date[1].split(':');
@@ -392,6 +420,7 @@ function toDate(entree){
 	return lastAccess;
 }
 
+//Conversion des couleurs
 function hslToHex(h, s, l) {
   h /= 360;
   s /= 100;
