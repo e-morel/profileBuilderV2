@@ -6,8 +6,8 @@
   "licence": "AGPL-3.0",
   "source": "https://github.com/e-morel/profileBuilder.git@build",
   "developer": {
-    "name": "Cozy",
-    "url": "https://cozy.io"
+    "name": "Emerick Morel",
+    "url": "https://github.com/e-morel"
   },
   "default_locale": "en",
   "locales": {},
