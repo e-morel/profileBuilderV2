@@ -267,7 +267,7 @@ function serieTemporelle(posts){
 	for(var date in tab){
 		cumul+=Math.pow(nbD[date]-moy,2);
 	}
-	ecartT=Math.sqrt(cumul/nb2);
+	ecartT=Math.sqrt(cumul/nbPeriode);
 	for(var date in tab){
 		if(tab[date].length>moy+ecartT){
 			var pic= "haut";
