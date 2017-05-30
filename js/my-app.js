@@ -236,30 +236,43 @@ async function renderQuestionnaire(questionnaire){
 function serieTemporelle(posts){
 	var moy=0;
 	var ecartT=0;
-	var nb=0;
+	var nbTags=0;
 	var tab= new Array();
 	var vues= new Array();
 	var date;
+	var nbD= new Array();
 	for (var m = 0; m < posts.length; m++) {
 		if(posts[m].tags!=null){
 			var date=posts[m].CreationDate.split("-");
 			var date='"'+date[0].substring(2,date[0].length)+date[1]+'"';
 			tab[date]= tab[date] || new Array();
+			nbD[date]= nbD[date] || 0;
 			var temp = posts[m].tags.split('<');
 			for(var n = 1; n < temp.length; n++){
 				temp[n] = temp[n].substring(0,temp[n].length-1);
 				vues[temp[n]]=vues[temp[n]] || 0;
 				vues[temp[n]]+=parseInt(posts[m].view_count);
                 tab[date].push(temp[n]);
-                nb++;
+                nbD[date]++;
+                nbTags++;
 			}
 		}
 	}
+	var nbPeriode=0;
 	for(var date in tab){
-		if(tab[date].length>10){
+		nbPeriode++;
+	}
+	moy=nbTags/nbPeriode;
+	var cumul=0;
+	for(var date in tab){
+		cumul+=Math.pow(nbD[date]-moy,2);
+	}
+	ecartT=Math.sqrt(cumul/nb2);
+	for(var date in tab){
+		if(tab[date].length>moy+ecartT){
 			var pic= "haut";
 			calcul_prefs(tab[date],vues,date,pic);
-		}else if(tab[date].length<4){
+		}else if(tab[date].length<moy-ecartT){
 			var pic= "bas";
 			calcul_prefs(tab[date],vues,date,pic);
 		}
@@ -269,7 +282,6 @@ function serieTemporelle(posts){
 //Calcul des préférences en fonction des pics d'activité
 function calcul_prefs(tags, views,date,pic){
 	var id="prefs"+date.substring(1,5);
-	console.log(id);
 	document.getElementById("dates").innerHTML +='<li><a href="#">20'+date.substring(1,3)+'-'+date.substring(3,5)+'</a></li>';
 	document.getElementById("issues").innerHTML +='<li id="'+id+'"><p class="center" id="'+id+'"></p></li>';	
 	var counts = new Array();
