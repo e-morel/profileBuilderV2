@@ -1,54 +1,18 @@
 {
-  "name": "profileBuilder",
-  "version": "1.1.1",
-  "license": "MIT",
-  "description": "Create your profile using your data",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/e-morel/profileBuilder.git@build"
-  },
-  "cozy-permissions": {
-    "apps": {
-      "description": "Required by the cozy-bar to display the icons of the apps",
-      "type": "io.cozy.apps",
-      "verbs": ["GET"]
-    },
-    "questionnaire": {
-		"description": "Required by the profile app to generate your sushi preferences",
-		"type": "org.emorel.questionnaire",
-		"verbs": ["GET"]
-    },
-    "user": {
-		"description": "Required by the profile app to display your profile",
-		"type": "org.emorel.user",
-		"verbs": ["GET"]
-    },
-    "post": {
-		"description": "Required by the profile app to generate your tag preferences",
-		"type": "org.emorel.post",
-		"verbs": ["GET"]
-    },
-    "prefecture": {
-		"description": "Required by the profile app to generate your sushi preferences",
-		"type": "org.emorel.prefecture",
-		"verbs": ["GET"]
-    },
-    "region": {
-		"description": "Required by the profile app to generate your sushi preferences",
-		"type": "org.emorel.region",
-		"verbs": ["GET"]
-    },
-    "seta": {
-		"description": "Required by the profile app to generate your sushi preferences",
-		"type": "org.emorel.seta",
-		"verbs": ["GET"]
-    },
-    "setb": {
-		"description": "Required by the profile app to generate your sushi preferences",
-		"type": "org.emorel.setb",
-		"verbs": ["GET"]
-    }
-  },
-  "cozy-displayName": "ProfileBuilder",
-  "devDependencies": {}
+"name": "profileBuilder",
+"cozy-type": "static",
+"cozy-displayName": "ProfileBuilder",
+"version": "1.0.0",
+"description": "Create your profile using your data",
+"icon-path": "icon.png",
+"cozy-permissions": {
+    "apps": "Required by the cozy-bar to display the icons of the apps",
+    "questionnaire": "Required by the profile app to generate your sushi preferences",
+    "user": "Required by the profile app to display your profile",
+    "post": "Required by the profile app to generate your tag preferences",
+    "prefecture": "Required by the profile app to generate your sushi preferences",
+    "region": "Required by the profile app to generate your sushi preferences",
+    "seta": "Required by the profile app to generate your sushi preferences",
+    "setb": "Required by the profile app to generate your sushi preferences"
+  }
 }
