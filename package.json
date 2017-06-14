@@ -1,24 +1,13 @@
 {
-  "name": "ProfileBuilder",
-  "slug": "profilesBuilder",
+  "name": "profileBuilder",
+  "version": "1.1.1",
+  "license": "MIT",
   "description": "Create your profile using your data",
-  "version": "3.0.0",
-  "licence": "AGPL-3.0",
-  "source": "https://github.com/e-morel/profileBuilder.git@build",
-  "developer": {
-    "name": "Emerick Morel",
-    "url": "https://github.com/e-morel"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e-morel/profileBuilder.git@build"
   },
-  "default_locale": "en",
-  "locales": {},
-  "routes": {
-    "/": {
-      "folder": "/",
-      "index": "index.html",
-      "public": false
-    }
-  },
-  "permissions": {
+  "cozy-permissions": {
     "apps": {
       "description": "Required by the cozy-bar to display the icons of the apps",
       "type": "io.cozy.apps",
@@ -59,5 +48,7 @@
 		"type": "org.emorel.setb",
 		"verbs": ["GET"]
     }
-  }
+  },
+  "cozy-displayName": "ProfileBuilder",
+  "devDependencies": {}
 }
