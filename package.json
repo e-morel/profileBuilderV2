@@ -1,0 +1,63 @@
+{
+  "name": "ProfileBuilder",
+  "slug": "profilesBuilder",
+  "description": "Create your profile using your data",
+  "version": "3.0.0",
+  "licence": "AGPL-3.0",
+  "source": "https://github.com/e-morel/profileBuilder.git@build",
+  "developer": {
+    "name": "Emerick Morel",
+    "url": "https://github.com/e-morel"
+  },
+  "default_locale": "en",
+  "locales": {},
+  "routes": {
+    "/": {
+      "folder": "/",
+      "index": "index.html",
+      "public": false
+    }
+  },
+  "permissions": {
+    "apps": {
+      "description": "Required by the cozy-bar to display the icons of the apps",
+      "type": "io.cozy.apps",
+      "verbs": ["GET"]
+    },
+    "questionnaire": {
+		"description": "Required by the profile app to generate your sushi preferences",
+		"type": "org.emorel.questionnaire",
+		"verbs": ["GET"]
+    },
+    "user": {
+		"description": "Required by the profile app to display your profile",
+		"type": "org.emorel.user",
+		"verbs": ["GET"]
+    },
+    "post": {
+		"description": "Required by the profile app to generate your tag preferences",
+		"type": "org.emorel.post",
+		"verbs": ["GET"]
+    },
+    "prefecture": {
+		"description": "Required by the profile app to generate your sushi preferences",
+		"type": "org.emorel.prefecture",
+		"verbs": ["GET"]
+    },
+    "region": {
+		"description": "Required by the profile app to generate your sushi preferences",
+		"type": "org.emorel.region",
+		"verbs": ["GET"]
+    },
+    "seta": {
+		"description": "Required by the profile app to generate your sushi preferences",
+		"type": "org.emorel.seta",
+		"verbs": ["GET"]
+    },
+    "setb": {
+		"description": "Required by the profile app to generate your sushi preferences",
+		"type": "org.emorel.setb",
+		"verbs": ["GET"]
+    }
+  }
+}
