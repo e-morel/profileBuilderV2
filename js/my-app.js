@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cozy.client.init({
     cozyURL: '//' + app.dataset.cozyDomain,
     token: app.dataset.token,
-    version: 3
+    version: 2
   })
   cozy.bar.init({
     appName: app.dataset.appName,
