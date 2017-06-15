@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('[role=application]')
   cozy.client.init({
-    cozyURL: 'http://cozy.local', //' + app.dataset.cozyDomain,
+    cozyURL: 'https://cozy.local', //' + app.dataset.cozyDomain,
     token: app.dataset.token,
     version: 2
   })
