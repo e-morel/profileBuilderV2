@@ -1,5 +1,9 @@
 'use strict'
 
+//Support à modifier en fonction de celui calculé sur le jeu de données
+var SUPPORT = 0;
+var q = 0;
+
 //Méthode pour initialiser l'API cozy-client-js et la Cozy-Bar
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('[role=application]')
@@ -16,8 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDocumentList();
 })
 
-//Support à modifier en fonction de celui calculé sur le jeu de données
-var SUPPORT = 1;
+function support(){
+    setCookie("support",document.querySelector('.supp').value);
+    location.reload();
+}
 
 //Fonction executant les requêtes auprès de la BDD
 async function updateDocumentList(){
@@ -469,3 +475,4 @@ $(document).ready(function(){
 });
 
 document.querySelector('.valide').addEventListener('click', sushis);
+document.querySelector('.support').addEventListener('click', support);
