@@ -27,7 +27,6 @@ async function updateDocumentList(){
 	  "fields": ["_id", "display_name", "location", "last_access_date", "creation_date", "reputation", "views", "up_votes", "down_votes"]
 	})
 	//Données concernant les users
-	console.log(user);
 	renderUser(user[0]);
 	
 	const allPosts = await cozy.client.data.defineIndex('post',['owner_user_id']);
@@ -37,7 +36,6 @@ async function updateDocumentList(){
 	    }
 	})
 	//Données sur les posts
-	console.log(posts);
 	renderPosts(posts);
 	serieTemporelle(posts);
 }
@@ -162,7 +160,6 @@ function renderPosts(posts){
 		}
 	}
 	HTML+="}";
-	console.log(HTML);
 	document.getElementById("prefs").innerHTML += Viz(HTML);
 	document.getElementById("prefs").innerHTML += "</br>Dégradé de couleur (vues): + rouge -> bleu -";
 }
