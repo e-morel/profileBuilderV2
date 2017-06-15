@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cozyURL: '//' + app.dataset.cozyDomain,
     token: app.dataset.token,
     version: 2
-  })/*
+  })
+console.log('//' + app.dataset.cozyDomain);
+/*
   cozy.bar.init({
     appName: app.dataset.appName,
     lang: app.dataset.locale
