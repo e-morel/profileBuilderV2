@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     token: app.dataset.token,
     version: 2
   })
-console.log('//' + app.dataset.cozyDomain);
 /*
   cozy.bar.init({
     appName: app.dataset.appName,
@@ -37,6 +36,7 @@ async function updateDocumentList(){
 	    }
 	})
 	//Données sur les posts
+	console.log(posts);
 	renderPosts(posts);
 	serieTemporelle(posts);
 }
