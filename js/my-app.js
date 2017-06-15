@@ -20,7 +20,7 @@ var SUPPORT = 1;
 
 //Fonction executant les requêtes auprès de la BDD
 async function updateDocumentList(){
-	const userByNum = await cozy.client.data.defineIndex('org.emorel.user',['numero']);
+	const userByNum = await cozy.client.data.defineIndex('user',['numero']);
 	const user = await cozy.client.data.query(userByNum, {
 	  "selector": {numero: 5},
 	  "fields": ["_id", "display_name", "location", "last_access_date", "creation_date", "reputation", "views", "up_votes", "down_votes"]
@@ -28,7 +28,7 @@ async function updateDocumentList(){
 	//Données concernant les users
 	renderUser(user[0]);
 	
-	const allPosts = await cozy.client.data.defineIndex('org.emorel.post',['_id']);
+	const allPosts = await cozy.client.data.defineIndex('post',['_id']);
 	const posts = await cozy.client.data.query(allPosts, {
 	  "selector": {
 		"_id": {"$gte": null}
@@ -42,7 +42,7 @@ async function updateDocumentList(){
 //Requête sur les données concernant les sushis
 async function sushis(){
 	var id=document.querySelector('.send').value;
-	const questionnaireByNum = await cozy.client.data.defineIndex('org.emorel.questionnaire',['numero']);
+	const questionnaireByNum = await cozy.client.data.defineIndex('questionnaire',['numero']);
 	const questionnaires = await cozy.client.data.query(questionnaireByNum, {
 		"selector": {
 			"numero": Number(id)
@@ -356,13 +356,13 @@ function calcul_prefs(tags, views,date,pic){
 
 //Fonctions de simplification du code
 async function getAdresseATM(personne){
-	const prefectureByNum = await cozy.client.data.defineIndex('org.emorel.prefecture',['numero']);
+	const prefectureByNum = await cozy.client.data.defineIndex('prefecture',['numero']);
 	const prefecture = await cozy.client.data.query(prefectureByNum, {
 	  "selector": {
 		"numero": personne.idPrefATM
 	    }
 	})
-	const regionByNum = await cozy.client.data.defineIndex('org.emorel.region',['numero']);
+	const regionByNum = await cozy.client.data.defineIndex('region',['numero']);
 	const region = await cozy.client.data.query(regionByNum, {
 	  "selector": {
 		"numero": personne.idRegATM
@@ -376,13 +376,13 @@ async function getAdresseATM(personne){
 }
 
 async function getAdresse(personne){
-	const prefectureByNum = await cozy.client.data.defineIndex('org.emorel.prefecture',['numero']);
+	const prefectureByNum = await cozy.client.data.defineIndex('prefecture',['numero']);
 	const prefecture = await cozy.client.data.query(prefectureByNum, {
 	  "selector": {
 		"numero": personne.idPref
 	    }
 	})
-	const regionByNum = await cozy.client.data.defineIndex('org.emorel.region',['numero']);
+	const regionByNum = await cozy.client.data.defineIndex('region',['numero']);
 	const region = await cozy.client.data.query(regionByNum, {
 	  "selector": {
 		"numero": personne.idReg
@@ -397,7 +397,7 @@ async function getAdresse(personne){
 
 async function getSetA(personne){
 	var temp = new Array();
-	const setAByNum = await cozy.client.data.defineIndex('org.emorel.seta',['numero']);
+	const setAByNum = await cozy.client.data.defineIndex('seta',['numero']);
 	for(var i = 0;i<3;i++){
 		const sushi = await cozy.client.data.query(setAByNum, {
 	  	"selector": {
@@ -411,7 +411,7 @@ async function getSetA(personne){
 
 async function getSetB(personne){
 	var temp = new Array();
-	const setBByNum = await cozy.client.data.defineIndex('org.emorel.setb',['numero']);
+	const setBByNum = await cozy.client.data.defineIndex('setb',['numero']);
 	for(var i = 0;i<3;i++){
 		const sushi = await cozy.client.data.query(setBByNum, {
 	  	"selector": {
