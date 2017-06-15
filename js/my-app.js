@@ -33,7 +33,7 @@ async function updateDocumentList(){
 	const allPosts = await cozy.client.data.defineIndex('post',['owner_user_id']);
 	const posts = await cozy.client.data.query(allPosts, {
 	  "selector": {
-		"owner_user_id": 5
+		"owner_user_id": 23825
 	    }
 	})
 	//Données sur les posts
