@@ -130,10 +130,12 @@ function renderPosts(posts){
 	var tmp="";
 	//Modification des tags pour esthétisme
 	for(var n = 0; n < tags.length; n++) {
-		fois[n]=temp[tags[n]];
+    	fois[n]=temp[tags[n]];
 		tags[n]=tags[n][0].toUpperCase() + tags[n].substring(1);
-		tmp=tags[n].split("-");
-		tags[n]=tmp[0]+"_"+tmp[1];
+		if(tags[n].search("-")!=-1){
+			tmp=tags[n].split("-");
+			tags[n]='"'+tmp[0]+"\n"+tmp[1]+'"';
+		}
 	}
 	//Création et implémentation du graphe Graphviz
 	var HTML="digraph {";
