@@ -161,6 +161,7 @@ function renderPosts(posts){
 		}
 	}
 	HTML+="}";
+	console.log(HTML);
 	document.getElementById("prefs").innerHTML += Viz(HTML);
 	document.getElementById("prefs").innerHTML += "</br>Dégradé de couleur (vues): + rouge -> bleu -";
 }
