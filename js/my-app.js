@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     cozyURL: '//' + app.dataset.cozyDomain,
     token: app.dataset.token,
     version: 2
-  })
+  })/*
   cozy.bar.init({
     appName: app.dataset.appName,
     lang: app.dataset.locale
-  })
+  })*/
   updateDocumentList();
 })
 
