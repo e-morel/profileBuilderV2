@@ -27,12 +27,13 @@ async function updateDocumentList(){
 	  "fields": ["_id", "display_name", "location", "last_access_date", "creation_date", "reputation", "views", "up_votes", "down_votes"]
 	})
 	//Données concernant les users
+	console.log(user);
 	renderUser(user[0]);
 	
-	const allPosts = await cozy.client.data.defineIndex('post',['_id']);
+	const allPosts = await cozy.client.data.defineIndex('post',['numero']);
 	const posts = await cozy.client.data.query(allPosts, {
 	  "selector": {
-		"_id": {"$gte": null}
+		"numero": {"$gte": null}
 	    }
 	})
 	//Données sur les posts
