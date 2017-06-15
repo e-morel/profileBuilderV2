@@ -3,7 +3,7 @@
 //Méthode pour initialiser l'API cozy-client-js et la Cozy-Bar
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.querySelector('[role=application]')
-  cozy.client.init({
+  /*cozy.client.init({
     cozyURL: '//' + app.dataset.cozyDomain,
     token: app.dataset.token,
     version: 3
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cozy.bar.init({
     appName: app.dataset.appName,
     lang: app.dataset.locale
-  })
+  })*/
   updateDocumentList();
 })
 
