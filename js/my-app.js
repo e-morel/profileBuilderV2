@@ -241,27 +241,20 @@ async function renderQuestionnaire(questionnaire){
 
 //Détection des pics d'activité
 function serieTemporelle(posts){
-	var moy=0;
-	var ecartT=0;
-	var nbTags=0;
 	var tab= new Array();
 	var vues= new Array();
 	var date;
-	var nbD= new Array();
 	for (var m = 0; m < posts.length; m++) {
 		if(posts[m].tags!=null){
 			var date=posts[m].CreationDate.split("-");
 			var date='"'+date[0].substring(2,date[0].length)+date[1]+'"';
 			tab[date]= tab[date] || new Array();
-			nbD[date]= nbD[date] || 0;
 			var temp = posts[m].tags.split('<');
 			for(var n = 1; n < temp.length; n++){
 				temp[n] = temp[n].substring(0,temp[n].length-1);
 				vues[temp[n]]=vues[temp[n]] || 0;
 				vues[temp[n]]+=parseInt(posts[m].view_count);
                 tab[date].push(temp[n]);
-                nbD[date]++;
-                nbTags++;
 			}
 		}
 	}
@@ -269,17 +262,39 @@ function serieTemporelle(posts){
 	for(var date in tab){
 		nbPeriode++;
 	}
-	moy=nbTags/nbPeriode;
-	var cumul=0;
+	var nbPeriodeQ1=Math.ceil(nbPeriode/4);
+	var nbTagsQ1=0;
+	var nbPeriodeQ3=Math.ceil((nbPeriode*3)/4);
+	var nbTagsQ3=0;
+	var i=1;
 	for(var date in tab){
-		cumul+=Math.pow(nbD[date]-moy,2);
+		if(i<=nbPeriodeQ1){
+			nbTagsQ1+=tab[date].length;
+		}else if(i>=nbPeriodeQ3){
+			nbTagsQ3+=tab[date].length;
+		}
+		i++;
 	}
-	ecartT=Math.sqrt(cumul/nbPeriode);
+	var cumulQ1=0;
+	var cumulQ3=0;
+	var moyQ1=nbTagsQ1/nbPeriodeQ1;
+	var moyQ3=nbTagsQ3/nbPeriodeQ3;
+	i=1;
 	for(var date in tab){
-		if(tab[date].length>moy+ecartT){
+		if(i<=nbPeriodeQ1){
+			cumulQ1+=Math.pow(tab[date].length-moyQ1,2);
+		}else if(i>nbPeriodeQ3){
+			cumulQ3+=Math.pow(tab[date].length-moyQ3,2);
+		}
+		i++;
+	}
+	var ecartTQ1=Math.sqrt(cumulQ1/nbPeriodeQ1);
+	var ecartTQ3=Math.sqrt(cumulQ3/nbPeriodeQ1);
+	for(var date in tab){
+		if(tab[date].length>=moyQ3+ecartTQ3){
 			var pic= "haut";
 			calcul_prefs(tab[date],vues,date,pic);
-		}else if(tab[date].length<moy-ecartT){
+		}else if(tab[date].length<=moyQ1-ecartTQ1){
 			var pic= "bas";
 			calcul_prefs(tab[date],vues,date,pic);
 		}
@@ -294,71 +309,87 @@ function calcul_prefs(tags, views,date,pic){
 	var counts = new Array();
     tags.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
     var temp = counts;
+    var calcul=true;
+    var HTML1 = 'Sujets plus fréquents : </br>';
     if(pic=="haut"){
+		HTML1+='Support appliqué : '+ SUPPORT+'</br>';
 		tags= new Array();
 		for(var n in counts){
 			if(counts[n]>SUPPORT){
 				tags.push(n);
 			}
 		}
-	}
-    tags.sort(function(a,b){if(counts[a]<2){return -1;}else{return counts[a] - counts[b]}});
-    tags.reverse();
-    var HTML1 = 'Sujets plus fréquents : ';
-	var fois = [];
-	var vues=[];
-	for(var m = 0; m < tags.length; m++) { vues[m]=0;}
-	for(var k = 0; k < tags.length; k++) {
-		vues[k]=views[tags[k]];
-	}
-	var tmp="";
-	for(var n = 0; n < tags.length; n++) {
-		fois[n]=temp[tags[n]];
-		tags[n]=tags[n][0].toUpperCase() + tags[n].substring(1);
-		tmp=tags[n].split("-");
-		tags[n]=tmp[0]+"_"+tmp[1];
-	}
-	var HTML="digraph {";
-	var preprevious=[];
-	var previous=[tags[0]];
-	/*fois[0]=11;
-	fois[1]=11;*/
-	var color=250;
-	var diff=5;
-	HTML+=tags[0]+'[color="'+hslToHex(parseInt(color-(vues[0]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
-	for(var n = 1; n < tags.length; n++) {
-		HTML+=tags[n]+'[color="'+hslToHex(parseInt(color-(vues[n]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
-		if(fois[n]<fois[n-1]){
-			for(var c = 0; c < previous.length; c++) {
-					HTML+=previous[c]+" -> "+tags[n]+";";
-			}
-			preprevious=previous;
-			previous=[tags[n]];
-		}else{
-			if(preprevious!=[]){
-				for(var c = 0; c < preprevious.length; c++) {
-						HTML+=preprevious[c]+" -> "+tags[n]+";";
-				}
-			}
-			previous.push(tags[n]);
+		if(tags.length<1){
+			HTML1+="Aucun tag ne n'est supérieur au support.";
+			calcul=false;
 		}
-	}
-	for(var h = 0; h < previous.length; h++) {
-		if(HTML.search(previous[h])==-1){
-			HTML+=previous[h]+";";
-		}
-	}
-	HTML+="}";
-	document.getElementById(id).innerHTML += Viz(HTML);
-	if(pic=="haut"){
-		document.getElementById(id).innerHTML += "</br>Pic d'activité élevé";
 	}else{
-		document.getElementById(id).innerHTML += "</br>Pic d'activité faible";
+		HTML1+='Support non appliqué.</br>';
 	}
-	document.getElementById(id).innerHTML += "</br>Dégradé de couleur (vues): + rouge -> bleu -";
-	$(function(){
-	$().timelinr();
-	});
+	document.getElementById(id).innerHTML += HTML1;
+	if(calcul){
+		tags.sort(function(a,b){if(counts[a]<2){return -1;}else{return counts[a] - counts[b]}});
+		tags.reverse();
+		var fois = [];
+		var vues=[];
+		for(var m = 0; m < tags.length; m++) { vues[m]=0;}
+		for(var k = 0; k < tags.length; k++) {
+			vues[k]=views[tags[k]];
+		}
+		var tmp="";
+		for(var n = 0; n < tags.length; n++) {
+			fois[n]=temp[tags[n]];
+			tags[n]=tags[n][0].toUpperCase() + tags[n].substring(1);
+			if(tags[n].search("-")!=-1){
+				tmp=tags[n].split("-");
+				tags[n]='"'+tmp[0]+"\n"+tmp[1]+'"';
+			}
+		}
+		var HTML="digraph {";
+		var preprevious=[];
+		var previous=[tags[0]];
+		/*fois[0]=11;
+		fois[1]=11;*/
+		var color=250;
+		var diff=5;
+		HTML+=tags[0]+'[color="'+hslToHex(parseInt(color-(vues[0]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
+		for(var n = 1; n < tags.length; n++) {
+			HTML+=tags[n]+'[color="'+hslToHex(parseInt(color-(vues[n]/diff)),80,60)+'",style=filled,fontname = "Ubuntu"];';
+			if(fois[n]<fois[n-1]){
+				for(var c = 0; c < previous.length; c++) {
+						HTML+=previous[c]+" -> "+tags[n]+";";
+				}
+				preprevious=previous;
+				previous=[tags[n]];
+			}else{
+				if(preprevious!=[]){
+					for(var c = 0; c < preprevious.length; c++) {
+							HTML+=preprevious[c]+" -> "+tags[n]+";";
+					}
+				}
+				previous.push(tags[n]);
+			}
+		}
+		for(var h = 0; h < previous.length; h++) {
+			if(HTML.search(previous[h])==-1){
+				HTML+=previous[h]+";";
+			}
+		}
+		HTML+="}";
+		document.getElementById(id).innerHTML += Viz(HTML);
+		if(pic=="haut"){
+			document.getElementById(id).innerHTML += "</br>Pic d'activité élevé";
+		}else{
+			document.getElementById(id).innerHTML += "</br>Pic d'activité faible";
+		}
+		document.getElementById(id).innerHTML += "</br>Dégradé de couleur (vues): + rouge -> bleu -";
+	}
+	if(q==0){
+		$(function(){
+		$().timelinr();
+		});
+	}
+	q++;
 }
 
 //Fonctions de simplification du code
